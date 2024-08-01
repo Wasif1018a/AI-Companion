@@ -2,6 +2,7 @@ streamlit
 transformers
 torch
 langchain==0.2.11
+langchain-huggingface
 peft
 pyngrok
 pydantic
