@@ -1,7 +1,6 @@
 streamlit
 transformers
 torch
-langchain
 langchain-huggingface
 langchainhub
 peft
