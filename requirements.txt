@@ -1,6 +1,6 @@
 streamlit
 transformers
 torch
-langchain
+langchain==0.2.11
 peft
 pyngrok
