@@ -129,21 +129,26 @@ class CustomOutputParser(StrOutputParser):
 
 # Cache the model and tokenizer to load them only once
 @st.cache_resource
-def load_model_and_tokenizer():
+def load_model_and_tokenizer(retries=3, delay=5):
     model_id = "NousResearch/Llama-2-7b-chat-hf"
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.float16)
-
-    # Load LoRA configuration and apply it to the model
-    # lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model2')
-    # model = get_peft_model(model, lora_config)
-
-    # Load pre-trained emotion classifier
+    
+    for attempt in range(retries):
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(model_id)
+            model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.float16)
+            break  # If successful, break out of the loop
+        except Exception as e:
+            if attempt < retries - 1:
+                st.warning(f"Download failed, retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                st.error("Failed to download model after multiple attempts.")
+                raise e
+    
     emotion_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
     emotion_model = TFAutoModelForSequenceClassification.from_pretrained("AaronMarker/emotionClassifier", num_labels=9)
     emotion_classifier = pipeline("text-classification", model=emotion_model, tokenizer=emotion_tokenizer)
 
-    # Define the emotion mapping
     emotions = {
         'LABEL_0': 'Joy',
         'LABEL_1': 'Desire',
