@@ -2,6 +2,7 @@ streamlit
 transformers
 torch
 langchain
+langchain_community
 langchain-huggingface
 langchainhub
 peft
