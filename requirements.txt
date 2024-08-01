@@ -4,4 +4,6 @@ torch
 langchain==0.2.11
 peft
 pyngrok
---upgrade langchain pydantic transformers datasets peft pandas torch
+pydantic
+datasets
+pandas
