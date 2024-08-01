@@ -25,8 +25,7 @@
 
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TFAutoModelForSequenceClassification
-from langchain.llms.huggingface_pipeline import HuggingFacePipeline
-from langchain import LLMChain, PromptTemplate
+from langchain import LLMChain, PromptTemplate, HuggingFacePipeline
 from langchain.memory.buffer import ConversationBufferMemory
 from langchain_core.output_parsers import StrOutputParser
 from peft import PeftModel, LoraConfig, get_peft_model
