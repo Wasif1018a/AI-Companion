@@ -26,6 +26,7 @@
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TFAutoModelForSequenceClassification
 from langchain import LLMChain, PromptTemplate
+from langchain_community import llms
 from langchain.llms import HuggingFacePipeline
 from langchain.memory.buffer import ConversationBufferMemory
 from langchain_core.output_parsers import StrOutputParser
