@@ -1,26 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, DataCollatorForLanguageModeling
-from transformers import pipeline
-from datasets import Dataset
-from peft import LoraConfig, get_peft_model
-import pandas as pd
-import torch
-
-
 # In[ ]:
 
 
-# !pip install datasets
-# !pip install datasets transformers
-pip install datasets transformers peft
-# !pip install transformers tensorflow
-pip install langchain transformers datasets peft tensorflow
-pip install langchain-community
+# # !pip install datasets
+# # !pip install datasets transformers
+# pip install datasets transformers peft
+# # !pip install transformers tensorflow
+# pip install langchain transformers datasets peft tensorflow
+# pip install langchain-community
 
 
 # ## **StreamLit**
