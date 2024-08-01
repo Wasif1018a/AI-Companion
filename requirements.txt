@@ -1,8 +1,9 @@
 streamlit
 transformers
 torch
-langchain==0.2.11
+langchain
 langchain-huggingface
+langchainhub
 peft
 pyngrok
 pydantic
