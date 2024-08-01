@@ -252,23 +252,23 @@ st.write('</div>', unsafe_allow_html=True)
 # In[140]:
 
 
-from pyngrok import ngrok
+# from pyngrok import ngrok
 
-# Start a new ngrok tunnel
-public_url = ngrok.connect(8000)
-print("Ngrok public URL:", public_url)
-
-
-# In[ ]:
-
-
-get_ipython().system('streamlit run streamlit_app_2.py --server.port 8000')
+# # Start a new ngrok tunnel
+# public_url = ngrok.connect(8000)
+# print("Ngrok public URL:", public_url)
 
 
 # In[ ]:
 
 
-get_ipython().system('ngrok authtoken 2jb86JKOHKjdCaoHKnPIeqPbJJ9_6Zrx6tHZQeLacbEwNFuCQ')
+# get_ipython().system('streamlit run streamlit_app_2.py --server.port 8000')
+
+
+# # In[ ]:
+
+
+# get_ipython().system('ngrok authtoken 2jb86JKOHKjdCaoHKnPIeqPbJJ9_6Zrx6tHZQeLacbEwNFuCQ')
 
 
 # In[ ]:
