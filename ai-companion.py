@@ -17,10 +17,10 @@ import torch
 
 # !pip install datasets
 # !pip install datasets transformers
-!pip install datasets transformers peft
+pip install datasets transformers peft
 # !pip install transformers tensorflow
-!pip install langchain transformers datasets peft tensorflow
-!pip install langchain-community
+pip install langchain transformers datasets peft tensorflow
+pip install langchain-community
 
 
 # ## **StreamLit**
