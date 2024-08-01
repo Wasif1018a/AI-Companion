@@ -6,6 +6,6 @@ langchain-huggingface
 langchainhub
 peft
 pyngrok
-pydantic
+pydantic==1.10.9
 datasets
 pandas
