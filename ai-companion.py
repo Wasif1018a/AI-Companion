@@ -1,28 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-# # !pip install datasets
-# # !pip install datasets transformers
-# pip install datasets transformers peft
-# # !pip install transformers tensorflow
-# pip install langchain transformers datasets peft tensorflow
-# pip install langchain-community
-
-
-# ## **StreamLit**
-
-# In[ ]:
-
-
-# !pip install streamlit
-
-
-# In[127]:
-
-
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TFAutoModelForSequenceClassification
 from langchain import LLMChain, PromptTemplate
@@ -80,19 +55,25 @@ class StoryCreativityChain:
         system_prompt = """You are a creative assistant specializing in generating detailed and imaginative stories, crafting interesting and well-structured recipes, and composing beautiful poetry. Follow these guidelines:
 
         1. **Stories:** Create engaging, detailed, and imaginative stories with vivid descriptions, compelling characters, and cohesive plots. Always consider the user's mood when crafting the story.
-        2. **Recipes:** Provide step-by-step instructions that are easy to follow, include all necessary ingredients, and result in delicious dishes. Tailor the recipe to the user's mood.
+        2. **Recipes:** Generate step-by-step instructions for recipes that are easy to follow, include all necessary ingredients, and result in delicious dishes. Respond to recipe-related queries such as:
+           - "What is the recipe of..."
+           - "How do I make..."
+           - "How can I make..."
+           - "I want to cook..."
         3. **Poetry:** Write poems that are meaningful, expressive, and emotionally resonant, taking the user's mood into account.
 
         For any other requests, respond politely and concisely with:
         "I'm sorry, but I can only assist with stories, recipes, and poetry. Let's focus on those areas."
-        After this response, do not say anything else.
+
+        Additionally, do not generate or provide code in any programming language such as C++, Python, JavaScript, etc. If asked about coding or any other topics outside stories, recipes, and poetry, respond with:
+        "I'm sorry, but I can only assist with stories, recipes, and poetry. Let's focus on those areas."
 
         Remember:
-        - Stick strictly to stories, recipes, and poetry even if the user repeatedly ask questions other than these.
+        - Stick strictly to stories, recipes, and poetry even if the user repeatedly asks questions other than these.
         - Maintain a polite and helpful tone.
         - Do not provide information or assistance outside the specified scope, regardless of user insistence.
         """
-
+        
         B_INST, E_INST = "[INST]", "[/INST]"
         B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
         SYSTEM_PROMPT1 = B_SYS + system_prompt + E_SYS
@@ -135,7 +116,7 @@ def load_model_and_tokenizer():
     model = AutoModelForCausalLM.from_pretrained(model_id, device_map={"": 0}, torch_dtype=torch.float16)
 
     # Load LoRA configuration and apply it to the model
-    lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model2')
+    lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model')
     model = get_peft_model(model, lora_config)
 
     # Load pre-trained emotion classifier
@@ -159,6 +140,9 @@ def load_model_and_tokenizer():
     return model, tokenizer, emotions, emotion_classifier
 
 model, tokenizer, emotions, emotion_classifier = load_model_and_tokenizer()
+
+# device = torch.device('cuda:1')
+# model.to(device)
 
 # Initialize the StoryCreativityChain
 story_chain = StoryCreativityChain(model, tokenizer)
@@ -191,6 +175,12 @@ def predict_emotion(sentence):
     prediction = emotions[emotion_classifier(sentence)[0]["label"]]
     return prediction
 
+# Function to convert text to audio
+def text_to_audio(text, filename="response.mp3"):
+    tts = gTTS(text)
+    tts.save(filename)
+    return filename
+
 if st.button("Generate Response"):
     if user_input:
         # Add user message to history
@@ -199,8 +189,14 @@ if st.button("Generate Response"):
         # Generate response
         response = st.session_state.chain({"question": user_input, "user's mood": predict_emotion(user_input)})
         
+        # Convert response to audio
+        audio_file = text_to_audio(response)
+        
         # Add assistant response to history
         st.session_state.history.append({"role": "assistant", "content": response})
+        
+        # Display audio player
+        st.audio(audio_file)
 
     else:
         st.write("Please enter a prompt.")
@@ -211,59 +207,3 @@ for message in st.session_state.history:
     role_class = "user" if message["role"] == "user" else "assistant"
     st.write(f'<div class="message {role_class}">{message["content"]}</div>', unsafe_allow_html=True)
 st.write('</div>', unsafe_allow_html=True)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-# model_id = "NousResearch/Llama-2-7b-chat-hf"
-# bnb_config = BitsAndBytesConfig(
-#     load_in_4bit=True,
-#     bnb_4bit_use_double_quant=True,
-#     bnb_4bit_quant_type="nf4",
-#     bnb_4bit_compute_dtype=torch.bfloat16
-# )
-
-# tokenizer = AutoTokenizer.from_pretrained(model_id)
-# model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb_config, device_map={"":0})
-
-
-# In[ ]:
-
-
-# !pip install pyngrok
-
-
-# In[140]:
-
-
-# from pyngrok import ngrok
-
-# # Start a new ngrok tunnel
-# public_url = ngrok.connect(8000)
-# print("Ngrok public URL:", public_url)
-
-
-# In[ ]:
-
-
-# get_ipython().system('streamlit run streamlit_app_2.py --server.port 8000')
-
-
-# # In[ ]:
-
-
-# get_ipython().system('ngrok authtoken 2jb86JKOHKjdCaoHKnPIeqPbJJ9_6Zrx6tHZQeLacbEwNFuCQ')
-
-
-# In[ ]:
-
-
-
-
