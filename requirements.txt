@@ -10,3 +10,4 @@ pyngrok
 pydantic
 datasets
 pandas
+gtts
