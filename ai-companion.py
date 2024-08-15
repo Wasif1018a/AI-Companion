@@ -115,9 +115,7 @@ def load_model_and_tokenizer():
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.float16)
 
-    # Load LoRA configuration and apply it to the model
-    # lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model')
-    # model = get_peft_model(model, lora_config)
+
 
     # Load pre-trained emotion classifier
     emotion_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
