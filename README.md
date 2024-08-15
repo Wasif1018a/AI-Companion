@@ -1,202 +1,83 @@
----
-base_model: NousResearch/Llama-2-7b-chat-hf
-library_name: peft
----
-
-# Model Card for Model ID
-
-<!-- Provide a quick summary of what the model is/does. -->
-
-
-
-## Model Details
-
-### Model Description
-
-<!-- Provide a longer summary of what this model is. -->
-
-
-
-- **Developed by:** [More Information Needed]
-- **Funded by [optional]:** [More Information Needed]
-- **Shared by [optional]:** [More Information Needed]
-- **Model type:** [More Information Needed]
-- **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
-- **Finetuned from model [optional]:** [More Information Needed]
-
-### Model Sources [optional]
-
-<!-- Provide the basic links for the model. -->
-
-- **Repository:** [More Information Needed]
-- **Paper [optional]:** [More Information Needed]
-- **Demo [optional]:** [More Information Needed]
-
-## Uses
-
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
-
-### Direct Use
-
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
-
-[More Information Needed]
-
-### Downstream Use [optional]
-
-<!-- This section is for the model use when fine-tuned for a task, or when plugged into a larger ecosystem/app -->
-
-[More Information Needed]
-
-### Out-of-Scope Use
-
-<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
-
-[More Information Needed]
-
-## Bias, Risks, and Limitations
-
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
-
-[More Information Needed]
-
-### Recommendations
-
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
-
-Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.
-
-## How to Get Started with the Model
-
-Use the code below to get started with the model.
-
-[More Information Needed]
-
-## Training Details
-
-### Training Data
-
-<!-- This should link to a Dataset Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
-
-[More Information Needed]
-
-### Training Procedure
-
-<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
-
-#### Preprocessing [optional]
-
-[More Information Needed]
-
-
-#### Training Hyperparameters
-
-- **Training regime:** [More Information Needed] <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
-
-#### Speeds, Sizes, Times [optional]
-
-<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
-
-[More Information Needed]
-
-## Evaluation
-
-<!-- This section describes the evaluation protocols and provides the results. -->
-
-### Testing Data, Factors & Metrics
-
-#### Testing Data
-
-<!-- This should link to a Dataset Card if possible. -->
-
-[More Information Needed]
-
-#### Factors
-
-<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-
-[More Information Needed]
-
-#### Metrics
-
-<!-- These are the evaluation metrics being used, ideally with a description of why. -->
-
-[More Information Needed]
-
-### Results
-
-[More Information Needed]
-
-#### Summary
-
-
-
-## Model Examination [optional]
-
-<!-- Relevant interpretability work for the model goes here -->
-
-[More Information Needed]
-
-## Environmental Impact
-
-<!-- Total emissions (in grams of CO2eq) and additional considerations, such as electricity usage, go here. Edit the suggested text below accordingly -->
-
-Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
-
-- **Hardware Type:** [More Information Needed]
-- **Hours used:** [More Information Needed]
-- **Cloud Provider:** [More Information Needed]
-- **Compute Region:** [More Information Needed]
-- **Carbon Emitted:** [More Information Needed]
-
-## Technical Specifications [optional]
-
-### Model Architecture and Objective
-
-[More Information Needed]
-
-### Compute Infrastructure
-
-[More Information Needed]
-
-#### Hardware
-
-[More Information Needed]
-
-#### Software
-
-[More Information Needed]
-
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-[More Information Needed]
-
-**APA:**
-
-[More Information Needed]
-
-## Glossary [optional]
-
-<!-- If relevant, include terms and calculations in this section that can help readers understand the model or model card. -->
-
-[More Information Needed]
-
-## More Information [optional]
-
-[More Information Needed]
-
-## Model Card Authors [optional]
-
-[More Information Needed]
-
-## Model Card Contact
-
-[More Information Needed]
-### Framework versions
-
-- PEFT 0.11.1
+Project Overview:
+This project involves fine-tuning a language model using PEFT (Parameter-Efficient Fine-Tuning) with LoRA (Low-Rank Adaptation) and integrating it into a Streamlit app. The Streamlit app acts as a creative assistant, helping users generate stories, recipes, and poetry. The fine-tuned model is optimized for generating content based on user mood, and the app includes functionalities like emotion detection and text-to-speech conversion.
+
+Key Features:
+Fine-Tuning with PEFT and LoRA: Efficient fine-tuning of the "NousResearch/Llama-2-7b-chat-hf" model using LoRA.
+Creative Content Generation: The app can generate stories, recipes, and poetry based on user input and detected mood.
+Emotion Detection: Emotion classification to tailor responses.
+Text-to-Speech: Converts generated responses to audio.
+Streamlit Integration: A user-friendly interface with a custom design for interaction.
+
+Project Structure:
+bash
+Copy code
+├── streamlit_app_2.py          # Streamlit app code
+├── fine_tuning.py              # Fine-tuning script
+├── datasets/
+│   ├── stories_data.csv        # Dataset with stories for fine-tuning
+├── models/
+│   ├── fine_tuned_model/       # Directory to save the fine-tuned model
+├── utils/
+│   ├── emotion_classifier.py   # Emotion classifier script
+├── requirements.txt            # Required Python libraries
+└── README.md                   # Project documentation
+
+Key Scripts
+streamlit_app.py: Main Streamlit app that interacts with users, generates content, predicts emotions, and converts text to audio.
+fine_tuning.py: Python script to fine-tune the language model using PEFT and LoRA.
+ai-companion.py: Contains code for loading the pre-trained model and applying the saved fine-tuned model configurations using PEFT and LoRA.
+
+Installation and Setup:
+Step 1: Install Required Libraries
+
+Step 2: Fine-tune the Model
+bash
+Copy code
+python fine_tuning.py
+
+Step 3: Run the Streamlit App
+bash
+Copy code
+streamlit run ai-companion.py
+
+Fine-Tuning Process:
+Loading Dataset: Load the dataset from a CSV file containing stories.
+Tokenization: Tokenize the dataset using the AutoTokenizer from the Hugging Face library.
+LoRA Configuration: Apply LoRA configuration to the model for parameter-efficient fine-tuning.
+Training: Use the Trainer API from Hugging Face to train the model with the specified training arguments.
+
+Streamlit App Features:
+User Interaction: Users can input their prompts in the text field and receive generated content based on their mood.
+Emotion Detection: The app detects the user's mood from the input text using an emotion classifier.
+Response Generation: Based on the input and detected mood, the app generates a relevant story, recipe, or poem.
+Text-to-Speech: The generated content is converted to an audio that users can listen to directly within the app.
+
+Usage:
+Enter a prompt: Provide a prompt related to a story, recipe, or poem.
+Generate Response: Click the "Generate Response" button.
+Listen to the Response: The response will be displayed and also can be played as audio.
+
+Example Prompts:
+Story: "Tell me a story about a brave knight."
+Recipe: "Give me a recipe for chocolate cake."
+Poem: "Write a poem about love."
+
+Emotion Classifier:
+The emotion classifier uses a pre-trained model from the Hugging Face library to detect the user's mood from the input text.
+Supported emotions include Joy, Desire, Admiration, Approval, Curiosity, Fear, Sadness, Anger, and Neutral.
+
+Text-to-Speech:
+The app uses GTTS (Google Text-to-Speech) to convert the generated responses to audio.
+The audio file is played within the app.
+
+Authors:
+Wasif Mehboob
+
+Contributors:
+Ahsan Waseem
+Abdul Moiz
+Ameer Hamza
+
+Acknowledgments
+Thanks to the Hugging Face community for the amazing libraries and models.
+Special thanks to the Streamlit community for making interactive web apps easy to build.
