@@ -141,7 +141,8 @@ The app uses GTTS (Google Text-to-Speech) to convert the generated responses to 
 The audio file is played within the app.
 
 
-Authors:
+Author:
+
 Wasif Mehboob
 
 
