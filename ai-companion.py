@@ -113,7 +113,7 @@ class CustomOutputParser(StrOutputParser):
 def load_model_and_tokenizer():
     model_id = "NousResearch/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map={"": 0}, torch_dtype=torch.float16)
+    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.float16)
 
     # Load LoRA configuration and apply it to the model
     lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model')
