@@ -147,10 +147,12 @@ Wasif Mehboob
 
 Contributors:
 Ahsan Waseem
+
 Abdul Moiz
+
 Ameer Hamza
 
 
-Acknowledgments
+Acknowledgments:
 Thanks to the Hugging Face community for the amazing libraries and models.
 Special thanks to the Streamlit community for making interactive web apps easy to build.
