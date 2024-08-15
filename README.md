@@ -42,20 +42,30 @@ Copy code
 Key Scripts:
 
 fine_tuning.py: Python script to fine-tune the language model using PEFT and LoRA.
+
 ai-companion.py: Contains code for loading the pre-trained model and applying the saved fine-tuned model configurations using PEFT and LoRA. Streamlit app integration that interacts with users, generates content, predicts emotions, and converts text to audio.
 
 
 Installation and Setup:
 
 Step 1: Install Required Libraries
+
 !pip install datasets
+
 !pip install datasets transformers
+
 !pip install datasets transformers peft
+
 !pip install transformers tensorflow
+
 !pip install langchain transformers datasets peft tensorflow 
+
 !pip install langchain-community
+
 !pip install streamlit
+
 !pip install gtts
+
 !pip install pyngrok
 
 or
