@@ -48,6 +48,8 @@ ai-companion.py: Contains code for loading the pre-trained model and applying th
 
 Installation and Setup:
 
+To run the codes in both the files, GPU is required which can be accessed through Google Colab or Kaggle notebooks.
+
 Step 1: Install Required Libraries
 
 !pip install datasets
