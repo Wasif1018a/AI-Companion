@@ -3,7 +3,6 @@ Project Overview:
 This project involves fine-tuning a language model using PEFT (Parameter-Efficient Fine-Tuning) with LoRA (Low-Rank Adaptation) and integrating it into a Streamlit app. The Streamlit app acts as a creative assistant, helping users generate stories, recipes, and poetry. The fine-tuned model is optimized for generating content based on user mood, and the app includes functionalities like emotion detection and text-to-speech conversion.
 
 
-
 Key Features:
 
 Fine-Tuning with PEFT and LoRA: Efficient fine-tuning of the "NousResearch/Llama-2-7b-chat-hf" model using LoRA.
@@ -16,16 +15,27 @@ Streamlit Integration: A user-friendly interface with a custom design for intera
 Project Structure:
 
 bash
+
 Copy code
+
 ├── streamlit_app_2.py          # Streamlit app code
+
 ├── fine_tuning.py              # Fine-tuning script
+
 ├── datasets/
+
 │   ├── stories_data.csv        # Dataset with stories for fine-tuning
+
 ├── models/
+
 │   ├── fine_tuned_model/       # Directory to save the fine-tuned model
+
 ├── utils/
+
 │   ├── emotion_classifier.py   # Emotion classifier script
+
 ├── requirements.txt            # Required Python libraries
+
 └── README.md                   # Project documentation
 
 
