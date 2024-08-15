@@ -2,6 +2,7 @@ streamlit
 transformers
 tensorflow
 torch
+pytorch
 langchain
 langchain_community
 langchain-huggingface
