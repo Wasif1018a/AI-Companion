@@ -79,7 +79,10 @@ bash
 
 Copy code
 
+Put the saved fine-tuned model configuration files, adaptor_config.json and adaptor_model.safetensors, in a folder named fine_tuned_model
+
 python fine_tuning.py
+
 
 Step 3: Run the Streamlit App
 
