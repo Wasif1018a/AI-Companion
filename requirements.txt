@@ -1,6 +1,6 @@
 streamlit
 transformers
-transformers tensorflow
+tensorflow
 torch
 langchain
 langchain_community
