@@ -81,7 +81,7 @@ bash
 
 Copy code
 
-Put the saved fine-tuned model configuration files, adaptor_config.json and adaptor_model.safetensors, in a folder named fine_tuned_model
+Put the saved fine-tuned model configuration files, adaptor_config.json and adaptor_model.safetensors, in a folder named fine_tuned_model and give path
 
 Run: python fine_tuning.py
 
