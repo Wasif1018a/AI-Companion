@@ -18,21 +18,21 @@ bash
 
 Copy code
 
-├── streamlit_app_2.py          # Streamlit app code
+├── ai-companion.py          # Streamlit app code
 
-├── fine_tuning.py              # Fine-tuning script
+├── fine_tuning.py           # Fine-tuning script
 
 ├── datasets/
 
-│   ├── stories_data.csv        # Dataset with stories for fine-tuning
+│   ├── stories_data.csv/recipes_data.csv/poetry_data.csv         # Datasets
 
 ├── models/
 
-│   ├── fine_tuned_model/       # Directory to save the fine-tuned model
+│   ├── fine_tuned_model LLAMA-2/        # Directory to save the fine-tuned model
 
-├── utils/
+├── emotion detection model/
 
-│   ├── emotion_classifier.py   # Emotion classifier script
+│   ├── DistilBert # Emotion classifier
 
 ├── requirements.txt            # Required Python libraries
 
