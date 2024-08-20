@@ -75,15 +75,9 @@ or
 pip install -r requirements.txt
 
 
-Step 2: Fine-tune the Model
-
-bash
-
-Copy code
+Step 2:
 
 Put the saved fine-tuned model configuration files, adaptor_config.json and adaptor_model.safetensors, in a folder named fine_tuned_model and give path
-
-Run: python fine_tuning.py
 
 
 Step 3: Run the Streamlit App
@@ -93,17 +87,6 @@ bash
 Copy code
 
 Run: streamlit run ai-companion.py
-
-
-Fine-Tuning Process:
-
-Loading Dataset: Load the dataset from a CSV file containing stories.
-
-Tokenization: Tokenize the dataset using the AutoTokenizer from the Hugging Face library.
-
-LoRA Configuration: Apply LoRA configuration to the model for parameter-efficient fine-tuning.
-
-Training: Use the Trainer API from Hugging Face to train the model with the specified training arguments.
 
 
 Streamlit App Features:
