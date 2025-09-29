@@ -146,5 +146,3 @@ streamlit run ai-companion.py
 * [Streamlit](https://streamlit.io/) community for simplifying interactive apps.
 
 ---
-
-Would you like me to **add badges** (e.g., Python version, Streamlit badge, Hugging Face badge) to make the README look even more professional? (I can do that next.)
