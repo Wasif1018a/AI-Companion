@@ -1,12 +1,25 @@
 import streamlit as st
+from transformers import Trainer, TrainingArguments, DataCollatorForLanguageModeling
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TFAutoModelForSequenceClassification
-from langchain import LLMChain, PromptTemplate
-from langchain_community import llms
-from langchain.llms import HuggingFacePipeline
+from langchain.prompts import ChatPromptTemplate
+from transformers import AutoModel, AutoTokenizer
+from langchain import LLMChain, PromptTemplate, HuggingFacePipeline
 from langchain.memory.buffer import ConversationBufferMemory
 from langchain_core.output_parsers import StrOutputParser
 from peft import PeftModel, LoraConfig, get_peft_model
+from datasets import Dataset
+from audio_recorder_streamlit import audio_recorder
+import pandas as pd
+import whisper
+import tempfile
 import torch
+from gtts import gTTS
+import os
+import streamlit as st
+import soundfile as sf
+import numpy as np
+from io import BytesIO
+
 
 # Custom CSS to style the app
 st.markdown("""
@@ -34,6 +47,22 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
+
+# Load Whisper model
+@st.cache_resource
+def load_whisper_model():
+    return whisper.load_model("base")  # Can switch to "small", "medium", or "large" models.
+
+# Whisper transcription function
+def transcribe_audio(audio_file):
+    try:
+        result = whisper_model.transcribe(audio_file.name)
+        return result["text"]
+    except Exception as e:
+        st.error(f"Error transcribing audio: {e}")
+        return ""
+
 
 class StoryCreativityChain:
     def __init__(self, model, tokenizer):
@@ -113,9 +142,16 @@ class CustomOutputParser(StrOutputParser):
 def load_model_and_tokenizer():
     model_id = "NousResearch/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.float16)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype="auto",
+        device_map="auto",
+        load_in_4bit=True
+    )
 
-
+    # Load LoRA configuration and apply it to the model
+    lora_config = LoraConfig.from_pretrained('/kaggle/input/fine-tuned-model2')
+    model = get_peft_model(model, lora_config)
 
     # Load pre-trained emotion classifier
     emotion_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
@@ -137,6 +173,7 @@ def load_model_and_tokenizer():
 
     return model, tokenizer, emotions, emotion_classifier
 
+whisper_model = load_whisper_model()
 model, tokenizer, emotions, emotion_classifier = load_model_and_tokenizer()
 
 # device = torch.device('cuda:1')
@@ -165,19 +202,43 @@ st.sidebar.markdown("""
 - **Stay on topic:** Remember, I specialize in stories, recipes, and poetry. Let's keep our chat focused on these!
 """)
 
-# User input
-user_input = st.text_input("Enter your prompt:")
 
 # Function to predict emotion
 def predict_emotion(sentence):
     prediction = emotions[emotion_classifier(sentence)[0]["label"]]
     return prediction
 
+# Function to transcribe audio using Whisper
+def transcribe_audio(audio_file):
+    try:
+        transcription = whisper_model.transcribe(audio_file.name)
+        return transcription["text"]
+    except Exception as e:
+        st.error(f"Error transcribing audio: {e}")
+        return ""
+
 # Function to convert text to audio
 def text_to_audio(text, filename="response.mp3"):
     tts = gTTS(text)
     tts.save(filename)
     return filename
+
+
+# Record and transcribe audio input
+audio_bytes = audio_recorder()
+if audio_bytes:
+    st.audio(audio_bytes, format="audio/wav")
+    # Create a temporary file to save the audio bytes
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio:
+        temp_audio.write(audio_bytes)  # Directly write audio_bytes
+        temp_audio_path = temp_audio  # Get the temporary file path
+    transcribed_text = transcribe_audio(temp_audio_path)  # Pass the file path to the transcription function
+    st.write(f"**Transcribed:** {transcribed_text}")
+else:
+    transcribed_text = ""
+
+# User input
+user_input = st.text_input("Enter your prompt:", value=transcribed_text)
 
 if st.button("Generate Response"):
     if user_input:
