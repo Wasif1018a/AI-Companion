@@ -1,149 +1,150 @@
-Project Overview:
+# 📝 AI Companion – Fine-Tuned Creative Assistant
 
-This project involves fine-tuning a language model using PEFT (Parameter-Efficient Fine-Tuning) with LoRA (Low-Rank Adaptation) and integrating it into a Streamlit app. The Streamlit app acts as a creative assistant, helping users generate stories, recipes, and poetry. The fine-tuned model is optimized for generating content based on user mood, and the app includes functionalities like emotion detection and text-to-speech conversion.
+## 🚀 Project Overview
 
+This project fine-tunes a **large language model** using **PEFT (Parameter-Efficient Fine-Tuning)** with **LoRA (Low-Rank Adaptation)** and integrates it into a **Streamlit app**.
+The app acts as a **creative assistant** to help users generate **stories, recipes, and poetry**, optimized to adapt to **user moods**.
 
-Key Features:
+✨ **Key highlights**:
 
-Fine-Tuning with PEFT and LoRA: Efficient fine-tuning of the "NousResearch/Llama-2-7b-chat-hf" model using LoRA.
-Creative Content Generation: The app can generate stories, recipes, and poetry based on user input and detected mood.
-Emotion Detection: Emotion classification to tailor responses.
-Text-to-Speech: Converts generated responses to audio.
-Streamlit Integration: A user-friendly interface with a custom design for interaction.
+* Fine-tuned model with PEFT + LoRA
+* Emotion detection
+* Text-to-speech conversion
+* Streamlit UI for seamless interaction
 
+---
 
-Project Structure:
+## 🔑 Key Features
 
-bash
+* **Fine-Tuning with PEFT + LoRA**: Efficiently fine-tunes *NousResearch/Llama-2-7b-chat-hf*.
+* **Creative Content Generation**: Stories, recipes, and poetry generated from user prompts.
+* **Emotion Detection**: Tailored content based on detected mood.
+* **Text-to-Speech**: Converts text output into audio with GTTS.
+* **Streamlit Integration**: Clean, interactive, and user-friendly interface.
 
-Copy code
+---
 
-├── ai-companion.py          # Streamlit app code
+## 📂 Project Structure
 
-├── fine_tuning.py           # Fine-tuning script
-
+```bash
+├── ai-companion.py                 # Streamlit app
+├── fine_tuning.py                  # Fine-tuning script
 ├── datasets/
-
-│   ├── stories_data.csv/recipes_data.csv/poetry_data.csv         # Datasets
-
+│   ├── stories_data.csv
+│   ├── recipes_data.csv
+│   ├── poetry_data.csv
 ├── models/
+│   ├── fine_tuned_model_LLAMA-2/   # Fine-tuned model files
+├── emotion_detection_model/
+│   ├── DistilBert                  # Emotion classifier
+├── requirements.txt                # Python dependencies
+└── README.md                       # Project documentation
+```
 
-│   ├── fine_tuned_model LLAMA-2/        # Directory to save the fine-tuned model
+---
 
-├── emotion detection model/
+## 📝 Key Scripts
 
-│   ├── DistilBert # Emotion classifier
+* **fine_tuning.py** – fine-tunes the model using PEFT + LoRA.
+* **ai-companion.py** – loads the pre-trained + fine-tuned model, integrates with Streamlit, generates content, detects emotions, and handles TTS.
 
-├── requirements.txt            # Required Python libraries
+---
 
-└── README.md                   # Project documentation
+## ⚙️ Installation & Setup
 
+### 1️⃣ Install Dependencies
 
-Key Scripts:
+You can use pip directly:
 
-fine_tuning.py: Python script to fine-tune the language model using PEFT and LoRA.
+```bash
+pip install datasets transformers peft tensorflow langchain langchain-community streamlit gtts pyngrok
+```
 
-ai-companion.py: Contains code for loading the pre-trained model and applying the saved fine-tuned model configurations using PEFT and LoRA. Streamlit app integration that interacts with users, generates content, predicts emotions, and converts text to audio.
+or install from the requirements file:
 
-
-Installation and Setup:
-
-To run the codes in both the files, GPU is required which can be accessed through Google Colab or Kaggle notebooks.
-
-Step 1: Install Required Libraries
-
-!pip install datasets
-
-!pip install datasets transformers
-
-!pip install datasets transformers peft
-
-!pip install transformers tensorflow
-
-!pip install langchain transformers datasets peft tensorflow 
-
-!pip install langchain-community
-
-!pip install streamlit
-
-!pip install gtts
-
-!pip install pyngrok
-
-or
-
+```bash
 pip install -r requirements.txt
+```
 
+### 2️⃣ Add Fine-Tuned Model
 
-Step 2:
+Place your saved LoRA adapter files:
 
-Put the saved fine-tuned model configuration files, adaptor_config.json and adaptor_model.safetensors, in a folder named fine_tuned_model and give path
+```
+adaptor_config.json  
+adaptor_model.safetensors  
+```
 
+inside:
 
-Step 3: Run the Streamlit App
+```
+models/fine_tuned_model_LLAMA-2/
+```
 
-bash
+### 3️⃣ Run the Streamlit App
 
-Copy code
+```bash
+streamlit run ai-companion.py
+```
 
-Run: streamlit run ai-companion.py
+---
 
+## 🖥 Streamlit App Features
 
-Streamlit App Features:
+* **User Interaction** – Input a prompt to generate a story, recipe, or poem.
+* **Emotion Detection** – Uses DistilBERT classifier to adapt responses.
+* **Response Generation** – Tailored text output based on input + detected emotion.
+* **Text-to-Speech** – Play generated content as audio.
 
-User Interaction: Users can input their prompts in the text field and receive generated content based on their mood.
+---
 
-Emotion Detection: The app detects the user's mood from the input text using an emotion classifier.
+## 🎯 Usage
 
-Response Generation: Based on the input and detected mood, the app generates a relevant story, recipe, or poem.
+1. Enter your prompt (story/recipe/poem).
+2. Click **Generate Response**.
+3. Listen to the generated audio.
 
-Text-to-Speech: The generated content is converted to an audio that users can listen to directly within the app.
+**Example Prompts:**
 
+* Story: *"Tell me a story about a brave knight."*
+* Recipe: *"Give me a recipe for chocolate cake."*
+* Poem: *"Write a poem about love."*
 
-Usage:
+---
 
-Enter a prompt: Provide a prompt related to a story, recipe, or poem.
+## 🧠 Emotion Classifier
 
-Generate Response: Click the "Generate Response" button.
+* Built using **Hugging Face DistilBERT** model.
+* Detects moods like: Joy, Desire, Admiration, Approval, Curiosity, Fear, Sadness, Anger, and Neutral.
 
-Listen to the Response: The response will be displayed and also can be played as audio.
+---
 
+## 🔊 Text-to-Speech
 
-Example Prompts:
+* Uses **GTTS (Google Text-to-Speech)**.
+* Audio playback inside the Streamlit app.
 
-Story: "Tell me a story about a brave knight."
+---
 
-Recipe: "Give me a recipe for chocolate cake."
+## 👥 Authors & Contributors
 
-Poem: "Write a poem about love."
+**Author:**
 
+* Wasif Mehboob
 
-Emotion Classifier:
+**Contributors:**
 
-The emotion classifier uses a pre-trained model from the Hugging Face library to detect the user's mood from the input text.
-Supported emotions include Joy, Desire, Admiration, Approval, Curiosity, Fear, Sadness, Anger, and Neutral.
+* Ahsan Waseem
+* Abdul Moiz
+* Ameer Hamza
 
+---
 
-Text-to-Speech:
-The app uses GTTS (Google Text-to-Speech) to convert the generated responses to audio.
-The audio file is played within the app.
+## 🙏 Acknowledgments
 
+* [Hugging Face](https://huggingface.co/) for model + libraries.
+* [Streamlit](https://streamlit.io/) community for simplifying interactive apps.
 
-Author:
+---
 
-Wasif Mehboob
-
-
-Contributors:
-
-Ahsan Waseem
-
-Abdul Moiz
-
-Ameer Hamza
-
-
-Acknowledgments:
-
-Thanks to the Hugging Face community for the amazing libraries and models.
-Special thanks to the Streamlit community for making interactive web apps easy to build.
+Would you like me to **add badges** (e.g., Python version, Streamlit badge, Hugging Face badge) to make the README look even more professional? (I can do that next.)
