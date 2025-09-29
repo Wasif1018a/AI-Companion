@@ -1,4 +1,4 @@
-# 📝 AI Companion – Fine-Tuned Creative Assistant
+# 📝 Audio-Based-LangChain-AI-Agent -- Creative Assistant
 
 ## 🚀 Project Overview
 
