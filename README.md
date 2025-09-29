@@ -27,26 +27,22 @@ The app acts as a **creative assistant** to help users generate **stories, recip
 ## 📂 Project Structure
 
 ```bash
-├── ai-companion.py                 # Streamlit app
-├── fine_tuning.py                  # Fine-tuning script
-├── datasets/
-│   ├── stories_data.csv
-│   ├── recipes_data.csv
-│   ├── poetry_data.csv
-├── models/
-│   ├── fine_tuned_model_LLAMA-2/   # Fine-tuned model files
-├── emotion_detection_model/
-│   ├── DistilBert                  # Emotion classifier
-├── requirements.txt                # Python dependencies
-└── README.md                       # Project documentation
+├── ai-companion.py        # Streamlit app
+├── ai-companion.ipynb     # Notebook version of Streamlit app
+├── Fine-tuning.py         # Fine-tuning script
+├── Fine-tuning.ipynb      # Notebook version of fine-tuning script
+├── requirements.txt       # Python dependencies
+└── README.md              # Project documentation
 ```
+
+> 🔄 Files with the same name but `.py` and `.ipynb` extensions are equivalent (script vs. notebook versions).
 
 ---
 
 ## 📝 Key Scripts
 
-* **fine_tuning.py** – fine-tunes the model using PEFT + LoRA.
-* **ai-companion.py** – loads the pre-trained + fine-tuned model, integrates with Streamlit, generates content, detects emotions, and handles TTS.
+* **Fine-tuning.py / Fine-tuning.ipynb** – fine-tunes the model using PEFT + LoRA.
+* **ai-companion.py / ai-companion.ipynb** – loads the pre-trained + fine-tuned model, integrates with Streamlit, generates content, detects emotions, and handles TTS.
 
 ---
 
@@ -66,22 +62,7 @@ or install from the requirements file:
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Add Fine-Tuned Model
-
-Place your saved LoRA adapter files:
-
-```
-adaptor_config.json  
-adaptor_model.safetensors  
-```
-
-inside:
-
-```
-models/fine_tuned_model_LLAMA-2/
-```
-
-### 3️⃣ Run the Streamlit App
+### 2️⃣ Run the Streamlit App
 
 ```bash
 streamlit run ai-companion.py
